@@ -3,11 +3,11 @@ name: Build Windows Exe
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # 支持在 GitHub 网页手动点击按钮触发打包
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest # 指定使用云端 Windows 环境打包
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -16,14 +16,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'npm'
+          node-version: 20
+          # 去掉了自动缓存 lock 文件的配置，防止报错
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies
-        run: npm install
+        run: npm install # 使用标准的 npm 安装
 
       - name: Build Tauri App (Windows Exe)
         uses: tauri-apps/tauri-action@v0
