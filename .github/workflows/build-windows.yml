@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    
+    # 强制让旧版 Action 兼容运行环境
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout repository
